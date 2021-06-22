@@ -1,10 +1,10 @@
 const sql = require('mssql')
 
 const config = {
-    user: 'AngelNail_SQLLogin_1',
-    password: 'ncrp9cdqka',
-    server: 'DBMeyah.mssql.somee.com',
-    database: 'DBMeyah',
+    user: 'pablobubu_SQLLogin_1',
+    password: '2kn49esol9',
+    server: 'alborada.mssql.somee.com',
+    database: 'alborada',
     options: {
         encrypt : true,
         enableArithAbort : true
