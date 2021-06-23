@@ -15,6 +15,7 @@ app.use('/usuario', usaurioR);
 app.use('/cliente', clienteR);*/
 
 app.use('/person', require('./Routes/person'));
+app.use('/intern', require('./Routes/intern'));
 
 app.listen(3000, () => {
     console.log('App listening on port 3000!');

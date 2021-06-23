@@ -51,6 +51,16 @@ const getPerson = async ( req, res = response ) => {
 const addPerson = async ( req, res = response ) => {
     const { Curp, Nombres, Apellido_paterno, Apellido_materno , Fecha_nac, Direccion, Colonia, Cp, Telefono, Correoelectronico  } = req.body;
     try {
+
+        const data = await runQuery(`select * from Persona where Correoelectronico = '${Correoelectronico.trim()}';`)
+    
+        if( data.rowsAffected[0] > 0 ){
+            return res.status(400).json({
+                ok : false,
+                msg : `El correo: '${Correoelectronico}' ya se encuentra en uso`
+            });
+        }
+
         const { recordset, rowsAffected} = await runQuery(`insert into Persona(Curp, Nombres, Apellido_paterno, Apellido_materno , Fecha_nac, Direccion, Colonia, Cp, Telefono, Correoelectronico) output inserted.Idpersona values ('${Curp}', '${Nombres}', '${Apellido_paterno}', '${Apellido_materno}','${Fecha_nac}', '${Direccion}', '${Colonia}', '${Cp}', '${Telefono}', '${Correoelectronico}')`);
         const { Idpersona } = recordset[0];
         if( rowsAffected[0] > 0 ) {
@@ -107,6 +117,16 @@ const editPerson = async ( req, res = response ) => {
     const { Curp, Nombres, Apellido_paterno, Apellido_materno , Fecha_nac, Direccion, Colonia, Cp, Telefono, Correoelectronico } = req.body;
 
     try {
+
+        const data = await runQuery(`select * from Persona where Correoelectronico = '${Correoelectronico.trim()}';`)
+    
+        if( data.rowsAffected[0] > 0 && idPerson != data.recordset[0].Idpersona){
+            return res.status(400).json({
+                ok : false,
+                msg : `El correo: '${Correoelectronico}' ya se encuentra en uso`,
+            });
+        }
+
         
         const { rowsAffected } = await runQuery(`update Persona set Curp = '${Curp}', Nombres = '${Nombres}', Apellido_paterno = '${Apellido_paterno}', Apellido_materno = '${Apellido_materno}', Fecha_nac = '${Fecha_nac}', Direccion = '${Direccion}', Colonia = '${Colonia}', Cp = '${Cp}', Telefono = '${Telefono}', Correoelectronico = '${Correoelectronico}'  where Idpersona = ${idPerson}`);
         
