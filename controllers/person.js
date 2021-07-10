@@ -151,10 +151,27 @@ const editPerson = async ( req, res = response ) => {
     }
 }
 
+const prueba = async( req, res = response ) => {
+    try {
+        setTimeout(() => {
+            res.status(200).json({
+                ok : true,
+                msg : 'yei'
+            })
+        }, 10000);
+    } catch (error) {
+        res.status(400).json({
+            ok : false,
+            msg : 'Ha ocurrido un error'
+        });
+    }
+}
+
 module.exports = {
     getPeople,
     getPerson, 
     addPerson,
     deletePerson,
-    editPerson
+    editPerson,
+    prueba
 }

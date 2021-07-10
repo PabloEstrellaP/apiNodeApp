@@ -4,7 +4,7 @@ const router = Router();
 
 const { validarJWT } = require('../middlewares/validadJWT');
 const { validarResultados } = require('../middlewares/validar-campos');
-const { getPeople, getPerson, addPerson, deletePerson, editPerson } = require('../controllers/person');
+const { getPeople, getPerson, addPerson, deletePerson, editPerson, prueba } = require('../controllers/person');
 
 router.get('/', [], getPeople);
 
@@ -42,4 +42,6 @@ router.put('/:id',[
     []
 ], editPerson);
 
+
+router.get('/eje/eje', [], prueba)
 module.exports = router;
